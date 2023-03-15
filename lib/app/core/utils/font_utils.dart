@@ -55,4 +55,18 @@ class FontUtils{
         fontWeight: FontWeight.w600,
         color: const Color(0xff574B78));
   }
+
+  static TextStyle font18w500(){
+    return const TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  static TextStyle font14(){
+    return const TextStyle(
+      fontSize: 14,
+      color: Color(0xff99B2C6),
+    );
+  }
 }

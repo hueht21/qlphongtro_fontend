@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/values/constan.dart';
 import '../../../core/base/responsive.dart';
-import '../myfiles_moldel/MyFiles.dart';
 import '../../home_admin/views/file_info_card.dart';
+import '../article_statistics_moldel/MyFiles.dart';
 
 
 class MyFiles extends StatelessWidget {

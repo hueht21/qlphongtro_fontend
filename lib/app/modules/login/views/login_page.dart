@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:qlphongtro/app/core/utils/string_img.dart';
+import 'package:qlphongtro/app/core/utils/string_svg.dart';
+import 'package:qlphongtro/app/core/values/dimens.dart';
 
 import '../../../core/base/responsive.dart';
 import '../../../core/base/widget/base_widget.dart';
 import '../../../core/utils/font_utils.dart';
+import '../../../core/values/colors.dart';
+import '../../../core/values/string_values.dart';
+import '../../../routes/app_pages.dart';
 
 part 'login_view.dart';
 
@@ -17,13 +21,9 @@ class LoginPage extends GetView {
         body: SafeArea(
       child: Row(
         children: [
-          Expanded(
-              flex: 2,
-              child: _buildInput()),
+          Expanded(flex: 2, child: _buildInput()),
           if (Responsive.isDesktop(context) || Responsive.isTablet(context))
-            Expanded(
-                flex: 4,
-                child: _viewImg())
+            Expanded(flex: 4, child: _viewImg())
         ],
       ),
     ));
@@ -31,13 +31,13 @@ class LoginPage extends GetView {
 
   Widget _buildInput() {
     return Container(
-      color: const Color(0xff364153),
-      child: Column(
-        children: [
-          Image.asset(AppImg.logo),
-          viewBuildInput()
-        ],
-      ).paddingOnly(top: Get.height * 0.2),
+      height: Get.height,
+      color: AppColors.darkLogin,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [Image.asset(AppImg.logo), viewBuildInput()],
+        ).paddingOnly(top: Get.height * 0.15),
+      ),
     );
   }
 

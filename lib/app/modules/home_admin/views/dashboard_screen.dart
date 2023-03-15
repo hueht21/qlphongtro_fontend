@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:qlphongtro/app/modules/home_admin/controllers/home_admin_controller.dart';
 import 'package:qlphongtro/app/modules/home_admin/views/recent_files.dart';
 import 'package:qlphongtro/app/modules/home_admin/views/storage_details.dart';
 
 import '../../../core/values/constan.dart';
 import '../../../core/base/responsive.dart';
+import '../../accout_personnel/views/accout_personnal_infor.dart';
+import '../../accout_personnel/views/accout_personnel_page.dart';
+import '../../article_statistics/article_statistics_views/my_fields.dart';
 import 'header.dart';
-import '../../myfiles/myfiles_views/my_fields.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends GetView<HomeAdminController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,22 +22,40 @@ class DashboardScreen extends StatelessWidget {
           children: [
             const Header(),
             const SizedBox(height: defaultPadding),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: _viewMyfile(), // các view chỉnh ở đây
-                ),
-                if (!Responsive.isMobile(context))
-                  const SizedBox(width: defaultPadding),
-                // On Mobile means if the screen is less than 850 we dont want to show it
-                if (!Responsive.isMobile(context))
-                  const Expanded(
-                    flex: 2,
-                    child: StarageDetails(),
-                  ),
-              ],
+            Obx(
+              () => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (controller.router.value == "/") ...[
+                    Expanded(
+                      flex: 5,
+                      child: _viewMyfile(), // các view chỉnh ở đây
+                    ),
+                  ] else if (controller.router.value ==
+                      "/accout_personnal") ...[
+                    const Expanded(
+                      flex: 5,
+                      child: AccoutPersonnalPage(), // các view chỉnh ở đây
+                    ),
+                  ],
+                  if (!Responsive.isMobile(context))
+                    const SizedBox(width: defaultPadding),
+                  if (!Responsive.isMobile(context)) ...[
+                    if (controller.router.value == "/") ...[
+                      const Expanded(
+                        flex: 2,
+                        child: StarageDetails(),
+                      ),
+                    ] else if (controller.router.value == "/accout_personnal")
+                      ...[
+                        const Expanded(
+                          flex: 2,
+                          child: AccoutPersonnalInfor(),
+                        ),
+                      ]
+                  ]
+                ],
+              ),
             )
           ],
         ),
@@ -48,6 +69,24 @@ class DashboardScreen extends StatelessWidget {
         const MyFiles(),
         const SizedBox(height: defaultPadding),
         const RecentFiles(),
+        if (Responsive.isMobile(Get.context!))
+          const SizedBox(height: defaultPadding),
+        if (Responsive.isMobile(Get.context!)) const StarageDetails(),
+      ],
+    );
+  }
+
+  Widget _accoutPresonnal() {
+    return Column(
+      children: [
+        const MyFiles(),
+        Container(
+          height: 160,
+          width: Get.width,
+          child: const AccoutPersonnalPage(),
+        ),
+        const SizedBox(height: defaultPadding),
+        // const RecentFiles(),
         if (Responsive.isMobile(Get.context!))
           const SizedBox(height: defaultPadding),
         if (Responsive.isMobile(Get.context!)) const StarageDetails(),

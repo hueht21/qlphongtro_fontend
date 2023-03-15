@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:qlphongtro/app/modules/home_admin/controllers/home_admin_controller.dart';
 
-class SideMenu extends StatelessWidget {
+class SideMenu extends GetView<HomeAdminController> {
   const SideMenu({
     Key? key,
   }) : super(key: key);
@@ -17,42 +19,53 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: "Dashboard",
             svgSrc: "assets/icons/menu_dashbord.svg",
-            press: () {},
+            press: () {
+              controller.router.value = "/";
+              Get.back();
+            },
           ),
+          // DrawerListTile(
+          //   title: "Transaction",
+          //   svgSrc: "assets/icons/menu_tran.svg",
+          //   press: () {},
+          // ),
+          // DrawerListTile(
+          //   title: "Task",
+          //   svgSrc: "assets/icons/menu_task.svg",
+          //   press: () {},
+          // ),
+          // DrawerListTile(
+          //   title: "Documents",
+          //   svgSrc: "assets/icons/menu_doc.svg",
+          //   press: () {},
+          // ),
+          // DrawerListTile(
+          //   title: "Store",
+          //   svgSrc: "assets/icons/menu_store.svg",
+          //   press: () {},
+          // ),
+          // DrawerListTile(
+          //   title: "Notification",
+          //   svgSrc: "assets/icons/menu_notification.svg",
+          //   press: () {},
+          // ),
+          // DrawerListTile(
+          //   title: "Profile",
+          //   svgSrc: "assets/icons/menu_profile.svg",
+          //   press: () {},
+          // ),
+          // DrawerListTile(
+          //   title: "Settings",
+          //   svgSrc: "assets/icons/menu_setting.svg",
+          //   press: () {},
+          // ),
           DrawerListTile(
-            title: "Transaction",
-            svgSrc: "assets/icons/menu_tran.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Task",
-            svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Documents",
-            svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Store",
-            svgSrc: "assets/icons/menu_store.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Notification",
-            svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Profile",
-            svgSrc: "assets/icons/menu_profile.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Settings",
+            title: "Tài khoản nhân viên",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
+            press: () {
+              controller.router.value = "/accout_personnal";
+              Get.back();
+            },
           ),
         ],
       ),
