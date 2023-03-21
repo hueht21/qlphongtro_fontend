@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:qlphongtro/app/modules/home_admin/controllers/home_admin_controller.dart';
+import 'package:qlphongtro/app/routes/app_pages.dart';
 
 class SideMenu extends GetView<HomeAdminController> {
   const SideMenu({
@@ -24,21 +25,33 @@ class SideMenu extends GetView<HomeAdminController> {
               Get.back();
             },
           ),
-          // DrawerListTile(
-          //   title: "Transaction",
-          //   svgSrc: "assets/icons/menu_tran.svg",
-          //   press: () {},
-          // ),
-          // DrawerListTile(
-          //   title: "Task",
-          //   svgSrc: "assets/icons/menu_task.svg",
-          //   press: () {},
-          // ),
-          // DrawerListTile(
-          //   title: "Documents",
-          //   svgSrc: "assets/icons/menu_doc.svg",
-          //   press: () {},
-          // ),
+          DrawerListTile(
+            title: "Quản lý bài viết",
+            svgSrc: "assets/icons/menu_tran.svg",
+            press: () {
+              controller.isManagePost.value = !controller.isManagePost.value;
+            },
+          ),
+          Obx(() => controller.isManagePost.value
+              ? Column(
+                  children: [
+                    DrawerListTile(
+                      title: "Bài viết",
+                      svgSrc: "assets/icons/menu_task.svg",
+                      press: () {
+                        controller.router.value = Routes.VIEW_WAITING_POST;
+                        Get.back();
+                      },
+                    ).paddingOnly(left: 20),
+                    DrawerListTile(
+                      title: "Documents",
+                      svgSrc: "assets/icons/menu_doc.svg",
+                      press: () {},
+                    ).paddingOnly(left: 20),
+                  ],
+                ).paddingOnly(left: 20)
+              : SizedBox()),
+
           // DrawerListTile(
           //   title: "Store",
           //   svgSrc: "assets/icons/menu_store.svg",

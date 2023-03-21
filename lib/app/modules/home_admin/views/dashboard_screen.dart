@@ -9,6 +9,7 @@ import '../../../core/base/responsive.dart';
 import '../../accout_personnel/views/accout_personnal_infor.dart';
 import '../../accout_personnel/views/accout_personnel_page.dart';
 import '../../article_statistics/article_statistics_views/my_fields.dart';
+import '../../post_waiting/views/post_waiting_page.dart';
 import 'header.dart';
 
 class DashboardScreen extends GetView<HomeAdminController> {
@@ -23,7 +24,7 @@ class DashboardScreen extends GetView<HomeAdminController> {
             const Header(),
             const SizedBox(height: defaultPadding),
             Obx(
-              () => Row(
+              () =>  Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (controller.router.value == "/") ...[
@@ -37,10 +38,18 @@ class DashboardScreen extends GetView<HomeAdminController> {
                       flex: 5,
                       child: AccoutPersonnalPage(), // các view chỉnh ở đây
                     ),
+                  ] else if (controller.router.value == "/view_post_waiting") ... [
+                    Expanded(
+                        flex: 5,
+                        child: PostWaitingPage())
                   ],
+
+                  ////
+
                   if (!Responsive.isMobile(context))
                     const SizedBox(width: defaultPadding),
                   if (!Responsive.isMobile(context)) ...[
+                    /////
                     if (controller.router.value == "/") ...[
                       const Expanded(
                         flex: 2,
@@ -53,6 +62,8 @@ class DashboardScreen extends GetView<HomeAdminController> {
                           child: AccoutPersonnalInfor(),
                         ),
                       ]
+
+                    ////
                   ]
                 ],
               ),
@@ -62,6 +73,26 @@ class DashboardScreen extends GetView<HomeAdminController> {
       ),
     );
   }
+
+  Widget _pageMyfile(BuildContext context){
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 5,
+          child: _viewMyfile(), // các view chỉnh ở đây
+        ),
+        if (!Responsive.isMobile(context))
+          const SizedBox(width: defaultPadding),
+        const Expanded(
+          flex: 2,
+          child: StarageDetails(),
+        ),
+      ],
+    );
+  }
+
+
 
   Widget _viewMyfile() {
     return Column(

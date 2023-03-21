@@ -16,7 +16,13 @@ Widget _viewTitleOption() {
                 (Responsive.isMobile(Get.context!) ? AppDimens.sizeVerticalSmall : AppDimens.sizeVertical),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          // tạo tai khoan
+          // ShowPopup.showDialogConfirm("content", confirm: () {
+          //
+          // }, actionTitle: "Xác nhận");
+          Get.toNamed(Routes.CREATE_ACC_PERSONNAL);
+        },
         icon: const Icon(Icons.add),
         label: const Text(AppStr.createAcc),
       ),

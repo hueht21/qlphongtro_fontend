@@ -18,5 +18,11 @@ class AppDimens {
   static const double sizeVerticalSmall = 2;
   static const double sizeVertical = 1;
   static const double minWidthTab = 800;
+  static const double btnMedium = 50;
+  static double fontBig() => 18;
+  static const int sizeFlex = 3;
+  static const double widthForm = 0.9;
+  static const double heightButtom = 45;
+  static const double widthInput = 250;
 
 }

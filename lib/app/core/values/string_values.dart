@@ -22,6 +22,15 @@ class AppStr {
   static const String function = "Chức năng";
   static const String personnal = "Nhân viên";
   static const String listAccPer = "Danh sách nhân viên";
+  static const String listPost = "Danh sách bài viết chờ";
+  static const String notification = "Thông báo";
+  static const String cancel = "Huỷ";
+  static const String cancelCreate = "Huỷ tạo";
+  static const String fullName = "Họ và tên";
+  static const String email = "Email";
+  static const String create = "Tạo";
+  static const String phoneNumber = "Số điện thoại";
+  static const String idCard = "Căn cước công dân";
 
 
 }

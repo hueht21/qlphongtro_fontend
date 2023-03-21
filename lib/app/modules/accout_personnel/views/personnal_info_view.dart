@@ -21,7 +21,7 @@ Widget _buildHeaderInfo() {
     Text("${AppStr.position}: Admin", style: FontUtils.font14()),
     const SizedBox(height: AppConst.defaultPadding),
     BaseWidget.buildDriver(
-        color: Colors.white, width: Get.width, height: AppDimens.sizeDriver),
+        color: AppColors.colorWhite, width: Get.width, height: AppDimens.sizeDriver),
   ]);
 }
 
