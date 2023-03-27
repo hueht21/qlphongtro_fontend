@@ -22,7 +22,7 @@ class AppStr {
   static const String function = "Chức năng";
   static const String personnal = "Nhân viên";
   static const String listAccPer = "Danh sách nhân viên";
-  static const String listPost = "Danh sách bài viết chờ";
+  static const String listPost = "Danh sách bài viết";
   static const String notification = "Thông báo";
   static const String cancel = "Huỷ";
   static const String cancelCreate = "Huỷ tạo";
@@ -31,6 +31,23 @@ class AppStr {
   static const String create = "Tạo";
   static const String phoneNumber = "Số điện thoại";
   static const String idCard = "Căn cước công dân";
+  static const String before = "Trước đó";
+  static const String all = "Tất cả";
+  static const String notApprovedYet = "Chưa duyệt";
+  static const String approve = "Phê duyệt";
+  static const String expired = "Hết hạn";
+  static const String next = "Tiếp";
+  static const String number = "Số";
+  static const String poster = "Người đăng";
+  static const String title = "Tiêu đề";
+  static const String shortDescription = "Mô tả ngắn";
+  static const String datePost = "Ngày đăng";
+  static const String numberDate = "Số ngày";
+  static const String status = "Trạng thái";
+  static const String waiting = "Đang chờ";
+
+
+
 
 
 }

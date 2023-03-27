@@ -19,7 +19,7 @@ class PostWaitingPage extends GetView<PostWaitingController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Danh sách bài viết",
+          AppStr.listPost,
           style: FontUtils.font18w500(),
         ),
         const SizedBox(
@@ -42,7 +42,7 @@ class PostWaitingPage extends GetView<PostWaitingController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildPage(title: "Trước đó",isForward: false),
+        _buildPage(title: AppStr.before,isForward: false),
         const SizedBox(
           width: 10,
         ),
@@ -52,7 +52,7 @@ class PostWaitingPage extends GetView<PostWaitingController> {
             width: 10,
           )
         ],
-        _buildPage(title: "Tiếp",isForward: true),
+        _buildPage(title: AppStr.next,isForward: true),
       ],
     );
   }
@@ -103,13 +103,13 @@ class PostWaitingPage extends GetView<PostWaitingController> {
     return Row(
       children: [
         Obx(() => _viewOption(
-            title: "Tất cả", isLeft: true, isRight: false, index: 0)),
+            title: AppStr.all, isLeft: true, isRight: false, index: 0)),
         Obx(() => _viewOption(
-            title: "Chưa duyệt", isLeft: false, isRight: false, index: 1)),
+            title: AppStr.notApprovedYet, isLeft: false, isRight: false, index: 1)),
         Obx(() => _viewOption(
-            title: "Phê duyệt", isLeft: false, isRight: false, index: 2)),
+            title: AppStr.approve, isLeft: false, isRight: false, index: 2)),
         Obx(() => _viewOption(
-            title: "Hết hạn", isLeft: false, isRight: true, index: 3)),
+            title: AppStr.expired, isLeft: false, isRight: true, index: 3)),
       ],
     );
   }
@@ -133,7 +133,7 @@ class PostWaitingPage extends GetView<PostWaitingController> {
                   topRight: Radius.circular(isRight ? 10 : 0),
                   bottomRight: Radius.circular(isRight ? 10 : 0)),
               // border: Border.,
-              color: isOnTap ? AppColors.darkBootomColor : Color(0xff364153)),
+              color: isOnTap ? AppColors.darkBootomColor : const Color(0xff364153)),
           child: Center(child: Text(title)).paddingSymmetric(horizontal: 10)),
     );
   }
@@ -153,26 +153,26 @@ class PostWaitingPage extends GetView<PostWaitingController> {
           columns: const [
             DataColumn2(
               size: ColumnSize.S,
-              label: Text("Số"),
+              label: Text(AppStr.number),
             ),
             DataColumn(
-              label: Text("Người đăng"),
+              label: Text(AppStr.poster),
             ),
             DataColumn(
-              label: Text("Tiêu đề"),
+              label: Text(AppStr.title),
             ),
             DataColumn(
-              label: Text("Mô tả ngắn"),
+              label: Text(AppStr.shortDescription),
             ),
             DataColumn(
-              label: Text("Ngày đăng"),
+              label: Text(AppStr.datePost),
             ),
             DataColumn2(
               size: ColumnSize.S,
-              label: Center(child: Text("Số ngày")),
+              label: Center(child: Text(AppStr.numberDate)),
             ),
             DataColumn(
-              label: Center(child: Text("Tình trạng")),
+              label: Center(child: Text(AppStr.status)),
             ),
           ],
           rows: List.generate(
@@ -200,7 +200,7 @@ class PostWaitingPage extends GetView<PostWaitingController> {
                       ? AppColors.colorAccAd
                       : AppColors.colorAccPer,
                   borderRadius: BorderRadius.circular(AppDimens.paddingHor)),
-              child: Text(post.status == 0 ? "Đang chờ" : "Phê duyệt")
+              child: Text(post.status == 0 ? AppStr.waiting : AppStr.approve)
                   .paddingSymmetric(
                       horizontal: 10, vertical: AppDimens.sizeVerticalSmall)),
         )),

@@ -52,11 +52,33 @@ class SideMenu extends GetView<HomeAdminController> {
                 ).paddingOnly(left: 20)
               : SizedBox()),
 
-          // DrawerListTile(
-          //   title: "Store",
-          //   svgSrc: "assets/icons/menu_store.svg",
-          //   press: () {},
-          // ),
+          DrawerListTile(
+            title: "Quản lý hệ thống",
+            svgSrc: "assets/icons/menu_store.svg",
+            press: () {
+              controller.isAccount.value = !controller.isAccount.value;
+            },
+          ),
+          Obx(() => controller.isAccount.value
+              ? Column(
+                  children: [
+                    DrawerListTile(
+                      title: "Quản lý role",
+                      svgSrc: "assets/icons/menu_task.svg",
+                      press: () {
+                        controller.router.value = Routes.CONFIG_ROLE;
+                        Get.back();
+                      },
+                    ).paddingOnly(left: 20),
+                    DrawerListTile(
+                      title: "Quản lý menu",
+                      svgSrc: "assets/icons/menu_doc.svg",
+                      press: () {},
+                    ).paddingOnly(left: 20),
+                  ],
+                ).paddingOnly(left: 20)
+              : SizedBox()),
+
           // DrawerListTile(
           //   title: "Notification",
           //   svgSrc: "assets/icons/menu_notification.svg",

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:qlphongtro/app/modules/accout_personnel/binding/accout_personnal_binding.dart';
 import 'package:qlphongtro/app/modules/home_admin/binding/home_admin_binding.dart';
 import '../modules/accout_personnel/views/accout_personnel_page.dart';
+import '../modules/config_role/views/config_role_views.dart';
 import '../modules/create_personnal/bindings/create_presonnal_binding.dart';
 import '../modules/create_personnal/views/create_personnal_page.dart';
 import '../modules/home_admin/views/home_admin_page.dart';
@@ -34,6 +35,10 @@ class AppPages {
       name: _Paths.CREATE_ACC_PERSONNAL,
       page: () => CreateAccPersonnal(),
       binding: CreatePresonnalBinding()
+    ),
+    GetPage(
+      name: _Paths.CONFIG_ROLE,
+      page: () => ConfigRolePage(),
     ),
   ];
 }

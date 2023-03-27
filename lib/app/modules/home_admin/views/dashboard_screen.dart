@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:qlphongtro/app/modules/home_admin/controllers/home_admin_controller.dart';
 import 'package:qlphongtro/app/modules/home_admin/views/recent_files.dart';
 import 'package:qlphongtro/app/modules/home_admin/views/storage_details.dart';
+import 'package:qlphongtro/app/routes/app_pages.dart';
 
 import '../../../core/values/constan.dart';
 import '../../../core/base/responsive.dart';
 import '../../accout_personnel/views/accout_personnal_infor.dart';
 import '../../accout_personnel/views/accout_personnel_page.dart';
 import '../../article_statistics/article_statistics_views/my_fields.dart';
+import '../../config_role/views/config_role_views.dart';
 import '../../post_waiting/views/post_waiting_page.dart';
 import 'header.dart';
 
@@ -24,7 +26,7 @@ class DashboardScreen extends GetView<HomeAdminController> {
             const Header(),
             const SizedBox(height: defaultPadding),
             Obx(
-              () =>  Row(
+              () => Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (controller.router.value == "/") ...[
@@ -38,10 +40,12 @@ class DashboardScreen extends GetView<HomeAdminController> {
                       flex: 5,
                       child: AccoutPersonnalPage(), // các view chỉnh ở đây
                     ),
-                  ] else if (controller.router.value == "/view_post_waiting") ... [
-                    Expanded(
-                        flex: 5,
-                        child: PostWaitingPage())
+                  ] else if (controller.router.value ==
+                      "/view_post_waiting") ...[
+                    Expanded(flex: 5, child: PostWaitingPage())
+                  ] else if (controller.router.value ==
+                      Routes.CONFIG_ROLE) ...[
+                    Expanded(flex: 5, child: ConfigRolePage())
                   ],
 
                   ////
@@ -55,13 +59,13 @@ class DashboardScreen extends GetView<HomeAdminController> {
                         flex: 2,
                         child: StarageDetails(),
                       ),
-                    ] else if (controller.router.value == "/accout_personnal")
-                      ...[
-                        const Expanded(
-                          flex: 2,
-                          child: AccoutPersonnalInfor(),
-                        ),
-                      ]
+                    ] else if (controller.router.value ==
+                        "/accout_personnal") ...[
+                      const Expanded(
+                        flex: 2,
+                        child: AccoutPersonnalInfor(),
+                      ),
+                    ]
 
                     ////
                   ]
@@ -74,7 +78,7 @@ class DashboardScreen extends GetView<HomeAdminController> {
     );
   }
 
-  Widget _pageMyfile(BuildContext context){
+  Widget _pageMyfile(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -91,8 +95,6 @@ class DashboardScreen extends GetView<HomeAdminController> {
       ],
     );
   }
-
-
 
   Widget _viewMyfile() {
     return Column(

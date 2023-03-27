@@ -9,7 +9,7 @@ void main() {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner : false,
-      title: "Application",
+      title: "Phong Tro FStack",
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
         canvasColor: secondaryColor,

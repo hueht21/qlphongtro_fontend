@@ -9,7 +9,11 @@ class HomeAdminController extends BaseGetxController{
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
 
   RxString router = "/".obs;
+
   RxBool isManagePost = false.obs;
+
+  RxBool isAccount = false.obs;
+
 
   void controlMenu() {
     if (!_scaffoldKey.currentState!.isDrawerOpen ) {
