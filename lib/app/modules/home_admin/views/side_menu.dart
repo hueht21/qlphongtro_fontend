@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:qlphongtro/app/core/utils/font_utils.dart';
+import 'package:qlphongtro/app/core/utils/string_svg.dart';
 import 'package:qlphongtro/app/modules/home_admin/controllers/home_admin_controller.dart';
 import 'package:qlphongtro/app/routes/app_pages.dart';
+
+import '../../../core/utils/string_img.dart';
+import '../../../core/values/string_values.dart';
 
 class SideMenu extends GetView<HomeAdminController> {
   const SideMenu({
@@ -14,20 +19,35 @@ class SideMenu extends GetView<HomeAdminController> {
     return Drawer(
       child: ListView(
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           DrawerHeader(
-            child: Image.asset("assets/images/logo.png"),
+            child: Column(
+              children: [
+                SizedBox(
+                    height: 80, width: 80, child: Image.asset(AppImg.account)),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "${controller.userRole.fullName}",
+                  style: FontUtils.font18w500(),
+                ),
+              ],
+            ),
           ),
           DrawerListTile(
-            title: "Dashboard",
-            svgSrc: "assets/icons/menu_dashbord.svg",
+            title: AppStr.home,
+            svgSrc: AppSvg.menuDashbord,
             press: () {
-              controller.router.value = "/";
+              controller.router.value = Routes.HOME_DASHBOARD;
               Get.back();
             },
           ),
           DrawerListTile(
-            title: "Quản lý bài viết",
-            svgSrc: "assets/icons/menu_tran.svg",
+            title: AppStr.postManagement,
+            svgSrc: AppSvg.menuMangerPost,
             press: () {
               controller.isManagePost.value = !controller.isManagePost.value;
             },
@@ -36,54 +56,60 @@ class SideMenu extends GetView<HomeAdminController> {
               ? Column(
                   children: [
                     DrawerListTile(
-                      title: "Bài viết",
-                      svgSrc: "assets/icons/menu_task.svg",
+                      title: AppStr.post,
+                      svgSrc: AppSvg.menuPost,
                       press: () {
                         controller.router.value = Routes.VIEW_WAITING_POST;
                         Get.back();
                       },
                     ).paddingOnly(left: 20),
                     DrawerListTile(
-                      title: "Documents",
-                      svgSrc: "assets/icons/menu_doc.svg",
+                      title: AppStr.post,
+                      svgSrc: AppSvg.menuPost,
                       press: () {},
                     ).paddingOnly(left: 20),
                   ],
                 ).paddingOnly(left: 20)
-              : SizedBox()),
+              : const SizedBox()),
+
+          if(controller.appController.isRoleMenu == 2)...[
+            DrawerListTile(
+              title: AppStr.manageSystem,
+              svgSrc: AppSvg.menuSystem,
+              press: () {
+                controller.isRole.value = !controller.isRole.value;
+              },
+            ),
+            Obx(() => controller.isRole.value
+                ? Column(
+              children: [
+                DrawerListTile(
+                  title: AppStr.manageRole,
+                  svgSrc: AppSvg.menuPost,
+                  press: () {
+                    controller.router.value = Routes.CONFIG_ROLE;
+                    Get.back();
+                  },
+                ).paddingOnly(left: 20),
+                DrawerListTile(
+                  title: AppStr.manageMenu,
+                  svgSrc: AppSvg.menuPost,
+                  press: () {},
+                ).paddingOnly(left: 20),
+              ],
+            ).paddingOnly(left: 20)
+                : const SizedBox()),
+          ],
+
 
           DrawerListTile(
-            title: "Quản lý hệ thống",
-            svgSrc: "assets/icons/menu_store.svg",
+            title: "Nạp tiền",
+            svgSrc: "assets/icons/menu_notification.svg",
             press: () {
-              controller.isAccount.value = !controller.isAccount.value;
+              Get.back();
+              Get.toNamed(Routes.RECHARGE);
             },
           ),
-          Obx(() => controller.isAccount.value
-              ? Column(
-                  children: [
-                    DrawerListTile(
-                      title: "Quản lý role",
-                      svgSrc: "assets/icons/menu_task.svg",
-                      press: () {
-                        controller.router.value = Routes.CONFIG_ROLE;
-                        Get.back();
-                      },
-                    ).paddingOnly(left: 20),
-                    DrawerListTile(
-                      title: "Quản lý menu",
-                      svgSrc: "assets/icons/menu_doc.svg",
-                      press: () {},
-                    ).paddingOnly(left: 20),
-                  ],
-                ).paddingOnly(left: 20)
-              : SizedBox()),
-
-          // DrawerListTile(
-          //   title: "Notification",
-          //   svgSrc: "assets/icons/menu_notification.svg",
-          //   press: () {},
-          // ),
           // DrawerListTile(
           //   title: "Profile",
           //   svgSrc: "assets/icons/menu_profile.svg",
@@ -94,14 +120,37 @@ class SideMenu extends GetView<HomeAdminController> {
           //   svgSrc: "assets/icons/menu_setting.svg",
           //   press: () {},
           // ),
-          DrawerListTile(
-            title: "Tài khoản nhân viên",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {
-              controller.router.value = "/accout_personnal";
-              Get.back();
-            },
-          ),
+
+          if(controller.appController.isRoleMenu == 2)...[
+            DrawerListTile(
+              title: AppStr.manageAcc,
+              svgSrc: AppSvg.menuPost,
+              press: () {
+                controller.isAccount.value = !controller.isAccount.value;
+              },
+            ),
+            Obx(() => controller.isAccount.value
+                ? Column(
+              children: [
+                DrawerListTile(
+                  title: AppStr.accoutPersonnal,
+                  svgSrc: AppSvg.menuPost,
+                  press: () {
+                    controller.router.value = "/accout_personnal";
+                    Get.back();
+                  },
+                ).paddingOnly(left: 20),
+                DrawerListTile(
+                  title: AppStr.manageMenu,
+                  svgSrc: AppSvg.menuPost,
+                  press: () {},
+                ).paddingOnly(left: 20),
+              ],
+            ).paddingOnly(left: 20)
+                : const SizedBox()),
+          ],
+
+
         ],
       ),
     );

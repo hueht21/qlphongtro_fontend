@@ -1,6 +1,6 @@
 part of "login_page.dart";
 
-Widget viewBuildInput() {
+Widget viewBuildInput(LoginController loginController) {
   return Column(
     children: [
       Text(AppStr.login, style: FontUtils.font16W600().copyWith(fontSize: AppDimens.sizeText))
@@ -27,11 +27,12 @@ Widget viewBuildInput() {
                   color: Colors.white, width: AppDimens.widthDrivier, height: AppDimens.heightDrivier)),
         ],
       ).paddingSymmetric(horizontal: AppDimens.paddingDriver, vertical: AppDimens.sizeText),
-      _inputLogin(title: AppStr.addressEmail),
-      _inputLogin(title: AppStr.passWord),
+      _inputLogin(title: AppStr.addressEmail, textEditingController: loginController.textEmail),
+      _inputLogin(title: AppStr.passWord, textEditingController: loginController.textPass, isPass: true),
       InkWell(
         onTap: (){
-          Get.offAllNamed(Routes.HOME);
+          loginController.getUserRole(loginController.textEmail.text, loginController.textPass.text);
+
         },
         child: Container(
           height: AppDimens.heigthBotton,
@@ -47,7 +48,7 @@ Widget viewBuildInput() {
   );
 }
 
-Widget _inputLogin({required String title}) {
+Widget _inputLogin({required String title, required TextEditingController textEditingController, bool isPass = false}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -61,8 +62,10 @@ Widget _inputLogin({required String title}) {
       Container(
         decoration: BoxDecoration(
             color: AppColors.coloBlack, borderRadius: BorderRadius.circular(AppDimens.sizeCircular)),
-        child: const TextField(
-          decoration: InputDecoration(enabledBorder: InputBorder.none),
+        child: TextField(
+          obscureText: isPass,
+          controller: textEditingController,
+          decoration: const InputDecoration(enabledBorder: InputBorder.none),
         ),
       ),
     ],

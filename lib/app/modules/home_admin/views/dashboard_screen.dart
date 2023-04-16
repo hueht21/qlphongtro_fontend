@@ -10,6 +10,7 @@ import '../../../core/base/responsive.dart';
 import '../../accout_personnel/views/accout_personnal_infor.dart';
 import '../../accout_personnel/views/accout_personnel_page.dart';
 import '../../article_statistics/article_statistics_views/my_fields.dart';
+import '../../config_role/views/config_account_role_view.dart';
 import '../../config_role/views/config_role_views.dart';
 import '../../post_waiting/views/post_waiting_page.dart';
 import 'header.dart';
@@ -29,19 +30,19 @@ class DashboardScreen extends GetView<HomeAdminController> {
               () => Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (controller.router.value == "/") ...[
+                  if (controller.router.value == Routes.HOME_DASHBOARD) ...[
                     Expanded(
                       flex: 5,
                       child: _viewMyfile(), // các view chỉnh ở đây
                     ),
                   ] else if (controller.router.value ==
-                      "/accout_personnal") ...[
+                      Routes.ACCOUT_PERSONNAL) ...[
                     const Expanded(
                       flex: 5,
                       child: AccoutPersonnalPage(), // các view chỉnh ở đây
                     ),
                   ] else if (controller.router.value ==
-                      "/view_post_waiting") ...[
+                      Routes.VIEW_WAITING_POST) ...[
                     Expanded(flex: 5, child: PostWaitingPage())
                   ] else if (controller.router.value ==
                       Routes.CONFIG_ROLE) ...[
@@ -54,18 +55,21 @@ class DashboardScreen extends GetView<HomeAdminController> {
                     const SizedBox(width: defaultPadding),
                   if (!Responsive.isMobile(context)) ...[
                     /////
-                    if (controller.router.value == "/") ...[
+                    if (controller.router.value == Routes.HOME_DASHBOARD) ...[
                       const Expanded(
                         flex: 2,
                         child: StarageDetails(),
                       ),
                     ] else if (controller.router.value ==
-                        "/accout_personnal") ...[
+                        Routes.ACCOUT_PERSONNAL) ...[
                       const Expanded(
                         flex: 2,
                         child: AccoutPersonnalInfor(),
                       ),
-                    ]
+                    ]else if (controller.router.value ==
+                        Routes.CONFIG_ROLE) ...[
+                      Expanded(flex: 2, child: ConfigAccRolePage())
+                    ],
 
                     ////
                   ]

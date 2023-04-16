@@ -25,6 +25,13 @@ class FontUtils{
         fontWeight: FontWeight.w500,
         color: Colors.white);
   }
+
+  static TextStyle font12W500() {
+    return GoogleFonts.plusJakartaSans().copyWith(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: Colors.white);
+  }
   static TextStyle font14W700() {
     return GoogleFonts.plusJakartaSans().copyWith(
         fontSize: 14,
@@ -38,6 +45,12 @@ class FontUtils{
         color: Colors.white);
   }
   static TextStyle font15W400() {
+    return GoogleFonts.plusJakartaSans().copyWith(
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+        color: Colors.white);
+  }
+  static TextStyle font16W400() {
     return GoogleFonts.plusJakartaSans().copyWith(
         fontSize: 15,
         fontWeight: FontWeight.w500,
@@ -55,6 +68,7 @@ class FontUtils{
         fontWeight: FontWeight.w600,
         color: const Color(0xff574B78));
   }
+
 
   static TextStyle font18w500(){
     return const TextStyle(

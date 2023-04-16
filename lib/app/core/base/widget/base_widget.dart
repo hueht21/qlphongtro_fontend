@@ -98,4 +98,16 @@ class BaseWidget {
     );
   }
 
+  static Widget sizeBoxHeight(double sizeHeight){
+    return SizedBox(
+      height: sizeHeight,
+    );
+  }
+
+  static Widget sizeBoxWidth(double sizeWidth){
+    return SizedBox(
+      width: sizeWidth,
+    );
+  }
+
 }

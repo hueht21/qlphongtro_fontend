@@ -44,8 +44,21 @@ class AppStr {
   static const String datePost = "Ngày đăng";
   static const String numberDate = "Số ngày";
   static const String status = "Trạng thái";
+  static const String home = "Trang chủ";
   static const String waiting = "Đang chờ";
+  static const String listAcc = "Danh sách tài khoản";
+  static const String listRole = "Danh sách Role";
+  static const String postManagement = "Quản lý bài viết";
+  static const String post = "Bài viết";
+  static const String manageSystem  = "Quản lý hệ thống";
+  static const String manageRole  = "Quản lý Role";
+  static const String manageMenu  = "Quản lý Menu";
+  static const String manageAcc  = "Quản lý tài khoản";
+  static const String accPersionnal  = "Tài khoản nhân viên";
 
+  static const String viewPosst = "Nhà mình có căn nhà chỉ sử dụng 1 phòng , hiện muốn cho thuê 2 phòng . Thông tin như sau: - Phòng diện tích: 14m2 - Tiện ích gần ngay chợ 71 Hoàng Văn Thái, dễ dàng đi chợ nấu cơm. Gần Royal city, công viên Thống nhất... - Tiền điện nước giá nhà nước (k thu kinh doanh) - Có bếp tầng 5 và tầng 1 - Có tủ lạnh sử dụng đặt khu sinh hoạt chung - Sân phơi đồ thoải mái- Ưu tiên sinh viên hoặc đi làm.(nữ giới) - Phòng trang bị: điều hòa, nóng lạnh, gường, internet chỉ 50k/ tháng - Nhà mới xây nên mới và sạch sẽ - Giá : 2.500.000/ tháng (nếu ở 2 người 3 triệu/ tháng)";
+
+  static const String img = "https://drive.google.com/uc?id=1lViRRxEjleJ5L12wbjPu-67NB7bTLSkt&export=download";
 
 
 

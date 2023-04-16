@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../modules/post_waiting/models/post.dart';
 import '../../utils/font_utils.dart';
 import '../../values/colors.dart';
+import '../../values/const.dart';
 import '../../values/dimens.dart';
 import '../../values/string_values.dart';
 import 'base_widget.dart';
@@ -22,22 +24,20 @@ class ShowPopup {
     ).whenComplete(() => _numDialog--);
   }
 
-
   static Future<bool> onBackPress(bool isActiveBack) {
     return Future.value(isActiveBack);
   }
 
-
   static void showDialogConfirm(
-      String content, {
-        required Function confirm,
-        required String actionTitle,
-        bool isActiveBack = true,
-        String title = AppStr.notification,
-        String exitTitle = AppStr.cancel,
-        Function? cancelFunc,
-        bool isAutoCloseDialog = false,
-      }) {
+    String content, {
+    required Function confirm,
+    required String actionTitle,
+    bool isActiveBack = true,
+    String title = AppStr.notification,
+    String exitTitle = AppStr.cancel,
+    Function? cancelFunc,
+    bool isAutoCloseDialog = false,
+  }) {
     _showDialog(
         Dialog(
           elevation: 0,
@@ -103,11 +103,33 @@ class ShowPopup {
         ),
         isActiveBack);
   }
+
+  static void buildPostWeb({required Post post,bool isActiveBack = true,required Widget viewPost}) {
+    _showDialog(
+        Dialog(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: SingleChildScrollView(
+            child: Container(
+                padding: const EdgeInsets.all(AppConst.defaultPadding),
+                decoration: const BoxDecoration(
+                  color: AppColors.secondaryColor,
+                  borderRadius: BorderRadius.all(Radius.circular(AppDimens.sizeCircular)),
+                ),
+                child: viewPost.paddingSymmetric(horizontal: 20)),
+          ),
+        ),
+        isActiveBack
+    );
+  }
+
   static Widget _baseButton(
-      Function? function,
-      String text, {
-        Color? colorText,
-      }) {
+    Function? function,
+    String text, {
+    Color? colorText,
+  }) {
     return BaseWidget.baseOnAction(
         onTap: () {
           dismissDialog();

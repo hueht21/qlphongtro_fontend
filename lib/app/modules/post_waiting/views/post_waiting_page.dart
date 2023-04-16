@@ -1,18 +1,26 @@
 
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:qlphongtro/app/application/app.dart';
+import 'package:qlphongtro/app/modules/post/views/detail_post_views.dart';
 import 'package:qlphongtro/app/modules/post_waiting/models/post.dart';
+import 'package:qlphongtro/app/modules/post_waiting/models/post_model.dart';
 
+import '../../../core/base/widget/show_popup.dart';
 import '../../../core/utils/font_utils.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/const.dart';
 import '../../../core/values/dimens.dart';
 import '../../../core/values/string_values.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/post_wating_controller.dart';
 
 class PostWaitingPage extends GetView<PostWaitingController> {
+
+  @override
+  PostWaitingController controller = Get.put(PostWaitingController());
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -147,51 +155,62 @@ class PostWaitingPage extends GetView<PostWaitingController> {
       ),
       child: SizedBox(
         width: double.infinity,
-        child: DataTable2(
-          columnSpacing: AppConst.defaultPadding,
-          minWidth: 1000,
-          columns: const [
-            DataColumn2(
-              size: ColumnSize.S,
-              label: Text(AppStr.number),
+        child: Obx(()
+          => DataTable2(
+            showCheckboxColumn : false,
+            columnSpacing: AppConst.defaultPadding,
+            minWidth: 1000,
+            columns: const [
+              DataColumn2(
+                size: ColumnSize.S,
+                label: Text(AppStr.number),
+              ),
+              DataColumn(
+                label: Text(AppStr.poster),
+              ),
+              DataColumn(
+                label: Text(AppStr.title),
+              ),
+              // DataColumn(
+              //   label: Text(AppStr.shortDescription),
+              // ),
+              DataColumn(
+                label: Text(AppStr.datePost),
+              ),
+              DataColumn2(
+                size: ColumnSize.S,
+                label: Center(child: Text(AppStr.numberDate)),
+              ),
+              DataColumn(
+                label: Center(child: Text(AppStr.status)),
+              ),
+            ],
+            rows: List.generate(
+              controller.listPostModel.length,
+              (index) => recentFileDataRow(controller.listPostModel[index]),
             ),
-            DataColumn(
-              label: Text(AppStr.poster),
-            ),
-            DataColumn(
-              label: Text(AppStr.title),
-            ),
-            DataColumn(
-              label: Text(AppStr.shortDescription),
-            ),
-            DataColumn(
-              label: Text(AppStr.datePost),
-            ),
-            DataColumn2(
-              size: ColumnSize.S,
-              label: Center(child: Text(AppStr.numberDate)),
-            ),
-            DataColumn(
-              label: Center(child: Text(AppStr.status)),
-            ),
-          ],
-          rows: List.generate(
-            controller.listPostWaiting.length,
-            (index) => recentFileDataRow(controller.listPostWaiting[index]),
           ),
         ),
       ),
     );
   }
 
-  DataRow recentFileDataRow(Post post) {
+  DataRow recentFileDataRow(PostModel post) {
     return DataRow(
+      onSelectChanged: (bool? select){
+        if(isMobile){
+          Get.toNamed(Routes.VIEW_POST,arguments: post);
+        }else{ // show pobop
+          // ShowPopup.buildPostWeb(post: post,viewPost: DetailPost(post));
+
+        }
+    },
       cells: [
         DataCell(Text("${post.id}")),
-        DataCell(Text(post.poster)),
-        DataCell(Text(post.title)),
-        DataCell(Text(post.shortDescription)),
-        DataCell(Text(post.dateSubmitt)),
+        DataCell(Text("${post.userResponse!.fullName }")),
+        DataCell(Text(post.title ?? "")),
+        // DataCell(Text(post.shortDescription)),
+        DataCell(Text("${post.createdAt}")),
         DataCell(Center(child: Text("${post.numberDate}"))),
         DataCell(Center(
           child: Container(

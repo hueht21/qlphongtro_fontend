@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'app/application/app_controller.dart';
 import 'app/routes/app_pages.dart';
 import 'app/core/values/constan.dart';
 
 void main() {
+
+  getPlatform();
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner : false,
@@ -19,3 +24,5 @@ void main() {
     ),
   );
 }
+
+void getPlatform() => GetPlatform.isMobile ? isMobile = !isMobile : isWeb = !isWeb;
