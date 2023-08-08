@@ -8,6 +8,7 @@ import '../modules/create_personnal/views/create_personnal_page.dart';
 import '../modules/home_admin/views/home_admin_page.dart';
 import '../modules/login/bingdings/login_bingding.dart';
 import '../modules/login/views/login_page.dart';
+import '../modules/post/bingdings/post_status_bingding.dart';
 import '../modules/post/views/post_view.dart';
 part 'app_routes.dart';
 
@@ -31,7 +32,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ACCOUT_PERSONNAL,
-      page: () => const AccoutPersonnalPage(),
+      page: () =>  AccoutPersonnalPage(),
       // binding: AccoutPersonnalBinding()
     ),
     GetPage(
@@ -47,6 +48,7 @@ class AppPages {
     GetPage(
       name: _Paths.VIEW_POST,
       page: () => PostViewPage(),
+      binding: PostStatusBingding()
     ),
 
     GetPage(

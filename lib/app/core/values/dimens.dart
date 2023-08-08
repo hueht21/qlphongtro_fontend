@@ -1,5 +1,9 @@
 class AppDimens {
 
+
+  static double fontMedium() => 16;
+  static const double btnSmall = 20;
+  static const double paddingSmall = 12.0;
   static const double maginTop = 15;
   static const double sizeText = 25;
   static const double widthDrivier= 135;

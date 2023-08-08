@@ -7,6 +7,7 @@ import 'package:qlphongtro/app/modules/post/views/detail_post_views.dart';
 import 'package:qlphongtro/app/modules/post_waiting/models/post.dart';
 import 'package:qlphongtro/app/modules/post_waiting/models/post_model.dart';
 
+import '../../../core/base/date_utils.dart';
 import '../../../core/base/widget/show_popup.dart';
 import '../../../core/utils/font_utils.dart';
 import '../../../core/values/colors.dart';
@@ -210,7 +211,7 @@ class PostWaitingPage extends GetView<PostWaitingController> {
         DataCell(Text("${post.userResponse!.fullName }")),
         DataCell(Text(post.title ?? "")),
         // DataCell(Text(post.shortDescription)),
-        DataCell(Text("${post.createdAt}")),
+        DataCell(Text(formatDateTimeToString(post.createdAt ?? DateTime.now()))),
         DataCell(Center(child: Text("${post.numberDate}"))),
         DataCell(Center(
           child: Container(

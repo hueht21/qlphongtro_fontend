@@ -4,7 +4,7 @@ class AppConst{
 
 
   static const String urlBase =
-      'http://192.168.164.230:8080';
+      'http://192.168.19.208:6996';
 
   static  String getUserRole = "/user-role/getUserRole";
   static  String updateUserBank(int id) => "/user-bank/update-bank-acount/$id";

@@ -1,6 +1,6 @@
 part of 'accout_personnal_infor.dart';
 
-Widget _buildHeaderInfo() {
+Widget _buildHeaderInfo(AccoutPersonnalController acc) {
   return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
     Text(
       AppStr.inforAccout,
@@ -15,17 +15,18 @@ Widget _buildHeaderInfo() {
       child: Image.asset(AppImg.logoView),
     ),
     const SizedBox(height: AppConst.defaultPadding),
-    Text("Phạm Ngọc Huế",
-        style: FontUtils.font18w500().copyWith(fontSize: AppDimens.fontSize)),
+    Obx(() => Text(acc.personnalModel.value.fullName ?? "",
+          style: FontUtils.font18w500().copyWith(fontSize: AppDimens.fontSize)),
+    ),
     const SizedBox(height: AppConst.defaultPadding - AppDimens.sizeSmall),
-    Text("${AppStr.position}: Admin", style: FontUtils.font14()),
+    Obx(()=> Text("${AppStr.position}: ${acc.personnalModel.value.nameRole}", style: FontUtils.font14())),
     const SizedBox(height: AppConst.defaultPadding),
     BaseWidget.buildDriver(
         color: AppColors.colorWhite, width: Get.width, height: AppDimens.sizeDriver),
   ]);
 }
 
-Widget _buildContactInfo() {
+Widget _buildContactInfo(AccoutPersonnalController controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -39,11 +40,11 @@ Widget _buildContactInfo() {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _itemContact(title: "phamngochue127@gmail.com", icons: Icons.mail),
+            Obx(()=> _itemContact(title: controller.personnalModel.value.email ??"", icons: Icons.mail)),
             const SizedBox(
               height: AppConst.defaultPadding,
             ),
-            _itemContact(title: "0376248911", icons: Icons.phone),
+            Obx(()=> _itemContact(title: controller.personnalModel.value.phoneNumber ??"", icons: Icons.phone)),
             const SizedBox(
               height: AppConst.defaultPadding,
             ),
@@ -56,8 +57,13 @@ Widget _buildContactInfo() {
           ],
         ),
       ),
-      Center(
-        child: Image.asset(AppImg.upAccout),
+      InkWell(
+        onTap: ()async {
+          await controller.getListPersonnal();
+        },
+        child: Center(
+          child: Image.asset(AppImg.upAccout),
+        ),
       )
     ],
   );

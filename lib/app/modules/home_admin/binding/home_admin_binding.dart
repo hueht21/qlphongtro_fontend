@@ -16,5 +16,6 @@ class HomeAdminBinding extends Bindings {
       () => AccoutPersonnalController(),
     );
     Get.lazyPut<PostWaitingController>(() => PostWaitingController());
+    Get.lazyPut<AccoutPersonnalController>(() => AccoutPersonnalController());
   }
 }

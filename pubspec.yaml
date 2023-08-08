@@ -18,6 +18,7 @@ dependencies:
   hive_flutter: ^1.0.0
   http: ^0.13.5
   loading_overlay_pro: ^2.1.1
+  intl: ^0.17.0
   get: ^4.3.8
   google_fonts: ^4.0.3
   flutter_svg: ^0.22.0

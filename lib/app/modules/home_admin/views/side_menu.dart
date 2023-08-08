@@ -3,11 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:qlphongtro/app/core/utils/font_utils.dart';
 import 'package:qlphongtro/app/core/utils/string_svg.dart';
+import 'package:qlphongtro/app/core/values/const.dart';
 import 'package:qlphongtro/app/modules/home_admin/controllers/home_admin_controller.dart';
 import 'package:qlphongtro/app/routes/app_pages.dart';
 
 import '../../../core/utils/string_img.dart';
 import '../../../core/values/string_values.dart';
+import '../../accout_personnel/controllers/accout_personnal_controller.dart';
 
 class SideMenu extends GetView<HomeAdminController> {
   const SideMenu({
@@ -63,11 +65,11 @@ class SideMenu extends GetView<HomeAdminController> {
                         Get.back();
                       },
                     ).paddingOnly(left: 20),
-                    DrawerListTile(
-                      title: AppStr.post,
-                      svgSrc: AppSvg.menuPost,
-                      press: () {},
-                    ).paddingOnly(left: 20),
+                    // DrawerListTile(
+                    //   title: AppStr.post,
+                    //   svgSrc: AppSvg.menuPost,
+                    //   press: () {},
+                    // ).paddingOnly(left: 20),
                   ],
                 ).paddingOnly(left: 20)
               : const SizedBox()),
@@ -126,6 +128,7 @@ class SideMenu extends GetView<HomeAdminController> {
               title: AppStr.manageAcc,
               svgSrc: AppSvg.menuPost,
               press: () {
+                AccoutPersonnalController con = Get.put(AccoutPersonnalController());
                 controller.isAccount.value = !controller.isAccount.value;
               },
             ),
@@ -137,6 +140,7 @@ class SideMenu extends GetView<HomeAdminController> {
                   svgSrc: AppSvg.menuPost,
                   press: () {
                     controller.router.value = "/accout_personnal";
+
                     Get.back();
                   },
                 ).paddingOnly(left: 20),
@@ -150,6 +154,13 @@ class SideMenu extends GetView<HomeAdminController> {
                 : const SizedBox()),
           ],
 
+          DrawerListTile(
+            title: "Đăng xuất",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              Get.offAndToNamed(Routes.LOGIN);
+            },
+          ),
 
         ],
       ),

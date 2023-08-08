@@ -9,14 +9,14 @@ import '../../../core/utils/string_img.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/const.dart';
 import '../../../core/values/string_values.dart';
+import '../controllers/accout_personnal_controller.dart';
 
 part 'personnal_info_view.dart';
 
-class AccoutPersonnalInfor extends GetView {
-  const AccoutPersonnalInfor({super.key});
+class AccoutPersonnalInfor {
+  // AccoutPersonnalController controller;
 
-  @override
-  Widget build(BuildContext context) {
+  Widget AccoutPersonnalInforr(AccoutPersonnalController controller) {
     return Container(
       padding: const EdgeInsets.all(AppConst.defaultPadding),
       decoration: const BoxDecoration(
@@ -26,9 +26,9 @@ class AccoutPersonnalInfor extends GetView {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _buildHeaderInfo(),
+          _buildHeaderInfo(controller),
           const SizedBox(height: AppConst.defaultPadding),
-          _buildContactInfo(),
+          _buildContactInfo(controller),
         ],
       ),
     );
