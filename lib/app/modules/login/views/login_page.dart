@@ -23,20 +23,22 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Obx(
-        () => LoadingOverlayPro(
-          isLoading: controller.isLoadingOverlay.value,
-          child: Row(
-            children: [
-              Expanded(flex: 2, child: _buildInput()),
-              if (Responsive.isDesktop(context) || Responsive.isTablet(context))
-                Expanded(flex: 4, child: _viewImg())
-            ],
+      body: SafeArea(
+        child: Obx(
+          () => LoadingOverlayPro(
+            isLoading: controller.isLoadingOverlay.value,
+            child: Row(
+              children: [
+                Expanded(flex: 2, child: _buildInput()),
+                if (Responsive.isDesktop(context) ||
+                    Responsive.isTablet(context))
+                  Expanded(flex: 4, child: _viewImg())
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 
   Widget _buildInput() {

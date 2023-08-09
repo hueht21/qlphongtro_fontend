@@ -1,8 +1,5 @@
 class AppConst{
 
-
-
-
   static const String urlBase =
       'http://192.168.164.230:8080';
 

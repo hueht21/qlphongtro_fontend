@@ -66,7 +66,7 @@ Widget _inputLogin({required String title, required TextEditingController textEd
           obscureText: isPass,
           controller: textEditingController,
           decoration: const InputDecoration(enabledBorder: InputBorder.none),
-        ),
+        ).paddingOnly(left: 10),
       ),
     ],
   ).paddingSymmetric(horizontal: AppDimens.paddingDriver, vertical: AppDimens.paddingDriver);
