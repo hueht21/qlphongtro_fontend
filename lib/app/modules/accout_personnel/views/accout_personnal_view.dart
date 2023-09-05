@@ -47,6 +47,7 @@ Widget _buildListPersonnal(AccoutPersonnalController controller) {
         SizedBox(
           width: double.infinity,
           child: DataTable2(
+            showCheckboxColumn : false,
             columnSpacing: AppConst.defaultPadding,
             minWidth: AppDimens.minWidthTab,
             columns: const [
@@ -67,8 +68,8 @@ Widget _buildListPersonnal(AccoutPersonnalController controller) {
               ),
             ],
             rows: List.generate(
-              controller.listAcc.length,
-              (index) => recentFileDataRow(controller.listAcc[index]),
+              controller.listPersonnal.length,
+              (index) => recentFileDataRow(controller.listPersonnal[index], controller),
             ),
           ),
         ),
@@ -77,17 +78,22 @@ Widget _buildListPersonnal(AccoutPersonnalController controller) {
   );
 }
 
-DataRow recentFileDataRow(AccoutPersonnal acc) {
+DataRow recentFileDataRow(PersonnalModel acc, AccoutPersonnalController controller) {
   return DataRow(
+    onSelectChanged: (bool? select){
+
+      controller.personnalModel.value = acc;
+
+    },
     cells: [
-      DataCell(Text(acc.nameAccout!)),
-      DataCell(Text(acc.nameLogin!)),
-      DataCell(Text(acc.phone!)),
+      DataCell(Text(acc.fullName!)),
+      DataCell(Text(acc.email!)),
+      DataCell(Text(acc.phoneNumber!)),
       DataCell(Container(
           decoration: BoxDecoration(
-              color: acc.position! == AppStr.personnal ? AppColors.colorAccPer:  AppColors.colorAccAd,
+              color: acc.nameRole! == AppStr.personnal ? AppColors.colorAccPer:  AppColors.colorAccAd,
               borderRadius: BorderRadius.circular(AppDimens.paddingHor)),
-          child: Text(acc.position!).paddingSymmetric(horizontal: AppDimens.sizeCircular, vertical: AppDimens.sizeVerticalSmall))),
+          child: Text(acc.nameRole!).paddingSymmetric(horizontal: AppDimens.sizeCircular, vertical: AppDimens.sizeVerticalSmall))),
       const DataCell(Center(child: Text("..."))),
     ],
   );

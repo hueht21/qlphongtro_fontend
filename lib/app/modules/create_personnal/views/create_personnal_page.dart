@@ -27,11 +27,11 @@ class CreateAccPersonnal extends GetView<AccoutPersonnalController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(flex: AppDimens.sizeFlex, child: _viewFormCreate(context)),
-            if (!Responsive.isMobile(context))
-              Expanded(
-                  flex: AppDimens.sizeFlex,
-                  child: BaseWidget.buildListPersonnal(controller)
-                      .paddingOnly(top: AppDimens.btnMedium, right: AppDimens.btnMedium))
+            // if (!Responsive.isMobile(context))
+            //   Expanded(
+            //       flex: AppDimens.sizeFlex,
+            //       child: BaseWidget.buildListPersonnal(controller)
+            //           .paddingOnly(top: AppDimens.btnMedium, right: AppDimens.btnMedium))
           ],
         ),
       )),

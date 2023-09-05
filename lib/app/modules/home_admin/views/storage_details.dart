@@ -20,15 +20,15 @@ class StarageDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         const Text(
-            "Biểu đồ doanh thu",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: defaultPadding),
-          Chart(),
+         // const Text(
+         //    "Biểu đồ doanh thu",
+         //    style: TextStyle(
+         //      fontSize: 18,
+         //      fontWeight: FontWeight.w500,
+         //    ),
+         //  ),
+         //  const SizedBox(height: defaultPadding),
+         //  Chart(),
           // StorageInfoCard(
           //   svgSrc: "assets/icons/Documents.svg",
           //   title: "Documents Files",

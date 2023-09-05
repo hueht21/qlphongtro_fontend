@@ -6,10 +6,17 @@ import 'package:qlphongtro/app/modules/post_waiting/models/post_model.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/const.dart';
 import '../../../core/values/dimens.dart';
+import '../../post_waiting/controllers/post_wating_controller.dart';
 import '../../post_waiting/models/post.dart';
+import '../controllers/post_controller.dart';
 import 'detail_post_views.dart';
 
-class PostViewPage extends GetView{
+class PostViewPage extends GetView<PostController>{
+
+  @override
+  PostController controller = Get.find();
+
+  PostWaitingController postWaitingController = Get.find();
 
   PostModel post = Get.arguments;
   @override
@@ -28,7 +35,7 @@ class PostViewPage extends GetView{
               color: AppColors.secondaryColor,
               borderRadius: BorderRadius.all(Radius.circular(AppDimens.sizeCircular)),
             ),
-            child: DetailPost(post)
+            child: DetailPost(post,postWaitingController)
           ).paddingOnly(top: 20,left: 15,right: 15),
         ),
       ),

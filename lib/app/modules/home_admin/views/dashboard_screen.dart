@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:qlphongtro/app/core/utils/string_img.dart';
 import 'package:qlphongtro/app/modules/home_admin/controllers/home_admin_controller.dart';
 import 'package:qlphongtro/app/modules/home_admin/views/recent_files.dart';
 import 'package:qlphongtro/app/modules/home_admin/views/storage_details.dart';
@@ -37,7 +38,7 @@ class DashboardScreen extends GetView<HomeAdminController> {
                     ),
                   ] else if (controller.router.value ==
                       Routes.ACCOUT_PERSONNAL) ...[
-                    const Expanded(
+                        Expanded(
                       flex: 5,
                       child: AccoutPersonnalPage(), // các view chỉnh ở đây
                     ),
@@ -46,7 +47,7 @@ class DashboardScreen extends GetView<HomeAdminController> {
                     Expanded(flex: 5, child: PostWaitingPage())
                   ] else if (controller.router.value ==
                       Routes.CONFIG_ROLE) ...[
-                    Expanded(flex: 5, child: ConfigRolePage())
+                    Expanded(flex: 4, child: ConfigRolePage())
                   ],
 
                   ////
@@ -62,13 +63,13 @@ class DashboardScreen extends GetView<HomeAdminController> {
                       ),
                     ] else if (controller.router.value ==
                         Routes.ACCOUT_PERSONNAL) ...[
-                      const Expanded(
-                        flex: 2,
-                        child: AccoutPersonnalInfor(),
-                      ),
+                       // Expanded(
+                       //  flex: 2,
+                       //  child: AccoutPersonnalInfor(),
+                      //),
                     ]else if (controller.router.value ==
                         Routes.CONFIG_ROLE) ...[
-                      Expanded(flex: 2, child: ConfigAccRolePage())
+                      Expanded(flex: 3, child: ConfigAccRolePage())
                     ],
 
                     ////
@@ -103,12 +104,13 @@ class DashboardScreen extends GetView<HomeAdminController> {
   Widget _viewMyfile() {
     return Column(
       children: [
-        const MyFiles(),
-        const SizedBox(height: defaultPadding),
-        const RecentFiles(),
-        if (Responsive.isMobile(Get.context!))
-          const SizedBox(height: defaultPadding),
-        if (Responsive.isMobile(Get.context!)) const StarageDetails(),
+        Image.asset(AppImg.admin_page)
+        // const MyFiles(),
+        // const SizedBox(height: defaultPadding),
+        // const RecentFiles(),
+        // if (Responsive.isMobile(Get.context!))
+        //   const SizedBox(height: defaultPadding),
+        // if (Responsive.isMobile(Get.context!)) const StarageDetails(),
       ],
     );
   }
@@ -120,7 +122,7 @@ class DashboardScreen extends GetView<HomeAdminController> {
         Container(
           height: 160,
           width: Get.width,
-          child: const AccoutPersonnalPage(),
+          child: AccoutPersonnalPage(),
         ),
         const SizedBox(height: defaultPadding),
         // const RecentFiles(),

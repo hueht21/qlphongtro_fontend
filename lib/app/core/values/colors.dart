@@ -14,4 +14,13 @@ class AppColors {
   static const colorAccAd =  Color(0xffFF69B4);
   static const colorWhite = Colors.white;
   static const hintTextColor = Colors.white54;
+  static const Color colorError = Color(0xFFff5f6d);
+  static const List<Color> colorGradientOrange = [
+    Color(0xFFff7e5f),
+    Color(0xFFff5f6d),
+  ];
+  static const List<Color> colorGradientGray = [
+    Color(0x20FFFFFF),
+    Color(0x20FFFFFF),
+  ];
 }

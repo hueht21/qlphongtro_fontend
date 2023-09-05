@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  auto_size_text: 3.0.0
   cached_network_image: ^3.1.0
   cupertino_icons: ^1.0.2
   data_table_2: 2.0.3
@@ -18,6 +19,7 @@ dependencies:
   hive_flutter: ^1.0.0
   http: ^0.13.5
   loading_overlay_pro: ^2.1.1
+  intl: ^0.17.0
   get: ^4.3.8
   google_fonts: ^4.0.3
   flutter_svg: ^0.22.0

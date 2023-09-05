@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,21 +48,24 @@ class ConfigAccRolePage extends GetView {
   Widget _buildItemRole() {
     return Row(
       children: [
-        Checkbox(value: false, onChanged: (value) {}),
+        Expanded(flex: 1,child: Checkbox(value: false, onChanged: (value) {})),
         BaseWidget.sizeBoxWidth(10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Admin hệ thống",
-              style: FontUtils.font16W600(),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text("Có các chức năng quản trị hệ thống",
-                style: FontUtils.font14W500()),
-          ],
+        Expanded(
+          flex: 6,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Admin hệ thống",
+                style: FontUtils.font16W600(),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              AutoSizeText("Có các chức năng quản trị hệ thống",
+                  style: FontUtils.font14W500()),
+            ],
+          ),
         )
       ],
     );

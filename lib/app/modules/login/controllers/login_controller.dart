@@ -20,7 +20,7 @@ class LoginController extends BaseGetxController{
     loginResult = await UserRoleRepository(this).getUserRole(email, pass);
 
     hideLoadingOverlay();
-    if(loginResult.code ==200){
+    if(loginResult.code == 200){
       Get.offAllNamed(Routes.HOME, arguments: loginResult.userDtoModel);
     }
     // log("${userRole.fullName}");

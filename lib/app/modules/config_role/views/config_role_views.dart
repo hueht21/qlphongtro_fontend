@@ -26,8 +26,8 @@ class ConfigRolePage extends GetView {
         BaseWidget.sizeBoxHeight(5),
         if(Responsive.isMobile(context))...[
           ConfigAccRolePage()
-
-        ]
+        ],
+        // ConfigAccRolePage()
       ],
     );
   }
@@ -36,6 +36,7 @@ class ConfigRolePage extends GetView {
 
   Widget _buildListAccount() {
     return Container(
+      width: Get.width * 0.6,
       padding: const EdgeInsets.all(AppConst.defaultPadding),
       decoration: const BoxDecoration(
           color: AppColors.secondaryColor,

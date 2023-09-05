@@ -1,7 +1,7 @@
 class AppConst{
 
   static const String urlBase =
-      'http://192.168.164.230:8080';
+      'https://phong-tro-fstack-logic-new-production.up.railway.app';
 
   static  String getUserRole = "/user-role/getUserRole";
   static  String updateUserBank(int id) => "/user-bank/update-bank-acount/$id";
