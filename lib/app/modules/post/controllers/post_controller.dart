@@ -11,9 +11,9 @@ class PostController extends BaseGetxController{
 
   PostWaitingController postWaitingController = Get.find();
 
-  Future<void> getPostStatus(int idPost,int idUser) async {
+  Future<void> getPostStatus(int idPost, int idUser, int idStatus) async {
     showLoadingOverlay();
-    PostStatus postStatus = PostStatus(idPost: idPost, status: 1,idUser: idUser);
+    PostStatus postStatus = PostStatus(idPost: idPost, status: idStatus,idUser: idUser);
     String status = await PostStatusResponstory(this).getResponPost(postStatus);
     hideLoadingOverlay();
     // showSnackBar(status);

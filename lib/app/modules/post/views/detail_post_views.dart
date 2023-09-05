@@ -21,79 +21,80 @@ class DetailPost extends GetView<PostController>{
   PostModel post;
   @override
   Widget build(BuildContext context) {
-    return LoadingOverlayPro(
-      
-      isLoading: controller.isLoadingOverlay.value,
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Image.asset(AppImg.account)),
-              const SizedBox(width: 20,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(post.userResponse?.fullName ?? "", style: FontUtils.font14W500(),),
-                  const SizedBox(height: 3,),
-                  Text(formatDateTimeToString(post.createdAt ?? DateTime.now()), style: FontUtils.font12W500(),)
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 20,),
-          Text("${post.title}", style: FontUtils.font18w500(),),
-          const SizedBox(
-            height: 20,
-          ),
-          Text("${post.content}", style: FontUtils.font14W500(),),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Tên chủ trọ : ", style: FontUtils.font14W500(),),
-              Expanded(child: Text("${post.areaResponse!.name }", style: FontUtils.font14W500(),)),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Địa chỉ : ", style: FontUtils.font14W500(),),
-              Expanded(child: Text("${post.areaResponse!.exactAddress }", style: FontUtils.font14W500(),)),
-            ],
-          ),
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Tình trạng : ", style: FontUtils.font14W500(),),
-              Expanded(child: Text(post.status ==0 ? "Đang chờ" : "Đã duyệt", style: FontUtils.font14W500(),)),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            height: 200,
-            width: Get.width - 20,
-            child: CachedNetworkImage(
-              imageUrl : "${post.thumbnail}",
-              placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+    return Obx(()
+      => LoadingOverlayPro(
+        isLoading: controller.isLoadingOverlay.value,
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Image.asset(AppImg.account)),
+                const SizedBox(width: 20,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(post.userResponse?.fullName ?? "", style: FontUtils.font14W500(),),
+                    const SizedBox(height: 3,),
+                    Text(formatDateTimeToString(post.createdAt ?? DateTime.now()), style: FontUtils.font12W500(),)
+                  ],
+                ),
+              ],
             ),
-          ),
-          _buildBottomAction()
-        ],
+            const SizedBox(height: 20,),
+            Text("${post.title}", style: FontUtils.font18w500(),),
+            const SizedBox(
+              height: 20,
+            ),
+            Text("${post.content}", style: FontUtils.font14W500(),),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Tên chủ trọ : ", style: FontUtils.font14W500(),),
+                Expanded(child: Text("${post.areaResponse!.name }", style: FontUtils.font14W500(),)),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Địa chỉ : ", style: FontUtils.font14W500(),),
+                Expanded(child: Text("${post.areaResponse!.exactAddress }", style: FontUtils.font14W500(),)),
+              ],
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Tình trạng : ", style: FontUtils.font14W500(),),
+                Expanded(child: Text(post.status ==0 ? "Đang chờ" : "Đã duyệt", style: FontUtils.font14W500(),)),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 200,
+              width: Get.width - 20,
+              child: CachedNetworkImage(
+                imageUrl : "${post.thumbnail}",
+                placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+            ),
+            _buildBottomAction()
+          ],
+        ),
       ),
     );
   }
@@ -104,8 +105,10 @@ class DetailPost extends GetView<PostController>{
           flex: 1,
           child: BaseWidget.buildButton(
             "Khoá bài",
-                () =>
-            Get.back(),
+                () async {
+                  await controller.getPostStatus(post.id ?? 0, post.userResponse!.id ?? 0, 2);
+                  Get.back();
+                },
             colors: AppColors.colorGradientGray,
           ),
         ),
@@ -115,7 +118,7 @@ class DetailPost extends GetView<PostController>{
           child: BaseWidget.buildButton(
             "Phê duyệt",
                 () async {
-                 await controller.getPostStatus(post.id ?? 0, post.userResponse!.id ?? 0);
+                 await controller.getPostStatus(post.id ?? 0, post.userResponse!.id ?? 0, 1);
                  // await postWaitingController.setListPostModel();
                  // Get.back();
 

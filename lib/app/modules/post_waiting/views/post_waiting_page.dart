@@ -1,9 +1,9 @@
-
 import 'dart:developer';
 
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_overlay_pro/loading_overlay_pro.dart';
 import 'package:qlphongtro/app/application/app.dart';
 import 'package:qlphongtro/app/modules/post/views/detail_post_views.dart';
 import 'package:qlphongtro/app/modules/post_waiting/models/post.dart';
@@ -20,32 +20,36 @@ import '../../../routes/app_pages.dart';
 import '../controllers/post_wating_controller.dart';
 
 class PostWaitingPage extends GetView<PostWaitingController> {
-
   @override
   PostWaitingController controller = Get.put(PostWaitingController());
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppStr.listPost,
-          style: FontUtils.font18w500(),
+    return Obx(
+      () => LoadingOverlayPro(
+        isLoading: controller.isLoadingOverlay.value,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppStr.listPost,
+              style: FontUtils.font18w500(),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            _buildOption(),
+            const SizedBox(
+              height: 20,
+            ),
+            _buildListPost(),
+            const SizedBox(
+              height: 20,
+            ),
+            _buildPageStyles()
+          ],
         ),
-        const SizedBox(
-          height: 20,
-        ),
-        _buildOption(),
-        const SizedBox(
-          height: 20,
-        ),
-        _buildListPost(),
-        const SizedBox(
-          height: 20,
-        ),
-        _buildPageStyles()
-      ],
+      ),
     );
   }
 
@@ -53,7 +57,7 @@ class PostWaitingPage extends GetView<PostWaitingController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildPage(title: AppStr.before,isForward: false),
+        _buildPage(title: AppStr.before, isForward: false),
         const SizedBox(
           width: 10,
         ),
@@ -63,22 +67,26 @@ class PostWaitingPage extends GetView<PostWaitingController> {
             width: 10,
           )
         ],
-        _buildPage(title: AppStr.next,isForward: true),
+        _buildPage(title: AppStr.next, isForward: true),
       ],
     );
   }
 
   Widget _buildPage({required String title, required bool isForward}) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         if (isForward) {
           controller.numberPage >= controller.listNunberPage.length
               ? controller.numberPage
               : controller.numberPage++;
+          controller.isTap.value = 0;
+          await controller.setListPostModel();
         } else {
           controller.numberPage <= controller.listNunberPage[0]
               ? controller.numberPage
               : controller.numberPage--;
+          controller.isTap.value = 0;
+          await controller.setListPostModel();
         }
       },
       child: Container(
@@ -95,8 +103,10 @@ class PostWaitingPage extends GetView<PostWaitingController> {
   Widget _buildNumberPage({required int number}) {
     bool isNumberPage = number == controller.numberPage.value;
     return InkWell(
-      onTap: () {
+      onTap: () async {
         controller.numberPage.value = number;
+        controller.isTap.value = 0;
+        await controller.setListPostModel();
       },
       child: Container(
         height: 35,
@@ -104,7 +114,10 @@ class PostWaitingPage extends GetView<PostWaitingController> {
             borderRadius: BorderRadius.circular(10),
             color:
                 isNumberPage ? AppColors.darkBootomColor : AppColors.darkLogin,
-            border: Border.all(color: isNumberPage ? AppColors.darkBootomColor : AppColors.hintTextColor)),
+            border: Border.all(
+                color: isNumberPage
+                    ? AppColors.darkBootomColor
+                    : AppColors.hintTextColor)),
         child: Center(child: Text("$number")).paddingSymmetric(horizontal: 10),
       ).paddingOnly(bottom: 10),
     );
@@ -113,14 +126,23 @@ class PostWaitingPage extends GetView<PostWaitingController> {
   Widget _buildOption() {
     return Row(
       children: [
+        Obx(
+          () => _viewOption(
+              title: AppStr.all, isLeft: true, isRight: false, index: 0),
+        ),
         Obx(() => _viewOption(
-            title: AppStr.all, isLeft: true, isRight: false, index: 0)),
-        Obx(() => _viewOption(
-            title: AppStr.notApprovedYet, isLeft: false, isRight: false, index: 1)),
-        Obx(() => _viewOption(
-            title: AppStr.approve, isLeft: false, isRight: false, index: 2)),
-        Obx(() => _viewOption(
-            title: AppStr.expired, isLeft: false, isRight: true, index: 3)),
+            title: AppStr.notApprovedYet,
+            isLeft: false,
+            isRight: false,
+            index: 1)),
+        Obx(
+          () => _viewOption(
+              title: AppStr.approve, isLeft: false, isRight: false, index: 2),
+        ),
+        Obx(
+          () => _viewOption(
+              title: AppStr.expired, isLeft: false, isRight: true, index: 3),
+        ),
       ],
     );
   }
@@ -136,13 +158,30 @@ class PostWaitingPage extends GetView<PostWaitingController> {
         controller.listPostModel.value = [];
         log("vào đây $index");
         controller.isTap.value = index;
-        switch(index) {
+        switch (index) {
           case 0:
             log("vào đây case 1");
-            controller.listPostModel = controller.listPostModelSearch;
+            controller.listPostModel.value = [];
+            controller.listPostModel.value = controller.listPostModelSearch;
             break;
-          case 1: 
-            controller.listPostModel.value = controller.listPostModelSearch.where((p0) => p0.status == 0).toList();
+          case 1:
+            controller.listPostModel.value = [];
+            controller.listPostModel.value = controller.listPostModelSearch
+                .where((p0) => p0.status == 0)
+                .toList();
+            break;
+          case 2:
+            controller.listPostModel.value = [];
+            controller.listPostModel.value = controller.listPostModelSearch
+                .where((p0) => p0.status == 1)
+                .toList();
+            break;
+          case 3:
+            controller.listPostModel.value = [];
+            controller.listPostModel.value = controller.listPostModelSearch
+                .where((p0) => p0.status == 2)
+                .toList();
+            break;
         }
       },
       child: Container(
@@ -154,7 +193,9 @@ class PostWaitingPage extends GetView<PostWaitingController> {
                   topRight: Radius.circular(isRight ? 10 : 0),
                   bottomRight: Radius.circular(isRight ? 10 : 0)),
               // border: Border.,
-              color: isOnTap ? AppColors.darkBootomColor : const Color(0xff364153)),
+              color: isOnTap
+                  ? AppColors.darkBootomColor
+                  : const Color(0xff364153)),
           child: Center(child: Text(title)).paddingSymmetric(horizontal: 10)),
     );
   }
@@ -168,9 +209,9 @@ class PostWaitingPage extends GetView<PostWaitingController> {
       ),
       child: SizedBox(
         width: double.infinity,
-        child: Obx(()
-          => DataTable2(
-            showCheckboxColumn : false,
+        child: Obx(
+          () => DataTable2(
+            showCheckboxColumn: false,
             columnSpacing: AppConst.defaultPadding,
             minWidth: 1000,
             columns: const [
@@ -210,34 +251,46 @@ class PostWaitingPage extends GetView<PostWaitingController> {
 
   DataRow recentFileDataRow(PostModel post) {
     return DataRow(
-      onSelectChanged: (bool? select){
-        if(isMobile){
-          Get.toNamed(Routes.VIEW_POST,arguments: post);
-        }else{ // show pobop
+      onSelectChanged: (bool? select) {
+        if (isMobile) {
+          Get.toNamed(Routes.VIEW_POST, arguments: post);
+        } else {
+          // show pobop
           // ShowPopup.buildPostWeb(post: post,viewPost: DetailPost(post));
 
         }
-    },
+      },
       cells: [
         DataCell(Text("${post.id}")),
-        DataCell(Text("${post.userResponse!.fullName }")),
+        DataCell(Text("${post.userResponse!.fullName}")),
         DataCell(Text(post.title ?? "")),
         // DataCell(Text(post.shortDescription)),
-        DataCell(Text(formatDateTimeToString(post.createdAt ?? DateTime.now()))),
+        DataCell(
+            Text(formatDateTimeToString(post.createdAt ?? DateTime.now()))),
         DataCell(Center(child: Text("${post.numberDate}"))),
-        DataCell(Center(
-          child: Container(
-              decoration: BoxDecoration(
-                  color: post.status == 0
-                      ? AppColors.colorAccAd
-                      : AppColors.colorAccPer,
-                  borderRadius: BorderRadius.circular(AppDimens.paddingHor)),
-              child: Text(post.status == 0 ? AppStr.waiting : AppStr.approve)
-                  .paddingSymmetric(
-                      horizontal: 10, vertical: AppDimens.sizeVerticalSmall)),
-        )),
+        DataCell(
+          Center(
+            child: Container(
+                decoration: BoxDecoration(
+                    color: getColor(post.status ?? 0),
+                    borderRadius: BorderRadius.circular(AppDimens.paddingHor)),
+                child: Text(post.status == 0 ? AppStr.waiting : (post.status == 2 ? "Hết hạn" : AppStr.approve))
+                    .paddingSymmetric(
+                        horizontal: 10, vertical: AppDimens.sizeVerticalSmall)),
+          ),
+        ),
         // const DataCell(Center(child: Text("..."))),
       ],
     );
+  }
+
+  Color getColor(int id) {
+    if(id == 0) {
+      return AppColors.colorAccAd;
+    } else if(id == 1) {
+      return AppColors.colorAccPer;
+    }else {
+      return Colors.red;
+    }
   }
 }

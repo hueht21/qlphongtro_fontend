@@ -11,25 +11,34 @@ class PostWaitingController extends BaseGetxController{
 
   RxList<PostModel> listPostModel = <PostModel>[].obs;
 
-  RxList<PostModel> listPostModelSearch = <PostModel>[].obs;
-
-
-  @override
-  onInit() async {
-    super.onInit();
-    await setListPostModel();
-  }
-
-  Future<void> setListPostModel() async {
-    listPostModel.value = await PostReponsitory(this).getPostResponsitory();
-    listPostModelSearch = listPostModel;
-  }
-
+  List<PostModel> listPostModelSearch = [];
 
   RxInt isTap = 0.obs;
 
   RxInt numberPage = 1.obs;
 
   List<int> listNunberPage = [1,2,3];
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    await setListPostModel();
+  }
+
+  Future<void> setListPostModel() async {
+    try {
+      showLoadingOverlay();
+      listPostModel.value = [];
+      listPostModelSearch = [];
+      // listPostModel.value = await PostReponsitory(this).getPostResponsitory(numberPage.value);
+      listPostModelSearch =  await PostReponsitory(this).getPostResponsitory(numberPage.value);
+      listPostModel.value = listPostModelSearch;
+      hideLoadingOverlay();
+    }catch(e) {
+      hideLoadingOverlay();
+    }
+
+  }
+
+
 
 }

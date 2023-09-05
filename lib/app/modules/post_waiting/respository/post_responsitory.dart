@@ -11,9 +11,9 @@ import '../models/post_result.dart';
 class PostReponsitory extends BaseRepository{
   PostReponsitory(super.controller);
 
-  Future<List<PostModel>> getPostResponsitory() async {
+  Future<List<PostModel>> getPostResponsitory(int page) async {
     List<PostModel> listPostModel = [];
-    var responsitory = await baseSendRquest(AppConst.getPostAll, RequestMethod.GET);
+    var responsitory = await baseSendRquest("${AppConst.getPostAll}?pageNumber=$page&pageSize=9", RequestMethod.GET);
     PostResult postResult = PostResult.fromJson(responsitory);
     for(int i=0;i<postResult.postResponses.length;i++){
       PostModel postModelResult = postResult.postResponses[i];

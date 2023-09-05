@@ -26,21 +26,23 @@ class AccoutPersonnalPage extends GetView<AccoutPersonnalController> {
 
   @override
   Widget build(BuildContext context) {
-    return LoadingOverlayPro(
-      isLoading: controller.isLoadingOverlay.value,
-      child: Column(
-        children:  [
-          _viewTitleOption(),
-          const SizedBox(height: AppConst.defaultPadding),
-          // _buildListPersonnal(controller),
-          _buildListPersonnal(controller),
-          if (Responsive.isMobile(context))
+    return Obx(()
+      => LoadingOverlayPro(
+        isLoading: controller.isLoadingOverlay.value,
+        child: Column(
+          children:  [
+            _viewTitleOption(),
             const SizedBox(height: AppConst.defaultPadding),
-          if (Responsive.isMobile(context)) ...[
-            AccoutPersonnalInfor().AccoutPersonnalInforr(controller),
-          ],
+            // _buildListPersonnal(controller),
+            _buildListPersonnal(controller),
+            if (Responsive.isMobile(context))
+              const SizedBox(height: AppConst.defaultPadding),
+            if (Responsive.isMobile(context)) ...[
+              AccoutPersonnalInfor().AccoutPersonnalInforr(controller),
+            ],
 
-        ],
+          ],
+        ),
       ),
     );
   }
