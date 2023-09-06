@@ -58,10 +58,10 @@ class DashboardScreen extends GetView<HomeAdminController> {
                   if (!Responsive.isMobile(context)) ...[
                     /////
                     if (controller.router.value == Routes.HOME_DASHBOARD) ...[
-                      const Expanded(
-                        flex: 2,
-                        child: StarageDetails(),
-                      ),
+                      // const Expanded(
+                      //   flex: 2,
+                      //   child: StarageDetails(),
+                      // ),
                     ] else if (controller.router.value ==
                         Routes.ACCOUT_PERSONNAL) ...[
                        // Expanded(
