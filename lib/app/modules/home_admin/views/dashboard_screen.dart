@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:qlphongtro/app/core/utils/string_img.dart';
 import 'package:qlphongtro/app/modules/home_admin/controllers/home_admin_controller.dart';
@@ -104,7 +105,15 @@ class DashboardScreen extends GetView<HomeAdminController> {
   Widget _viewMyfile() {
     return Column(
       children: [
-        Image.asset(AppImg.admin_page)
+
+        SizedBox(
+          width: Get.width - 20,
+          height: 700,
+          child: InAppWebView(
+            initialUrlRequest: URLRequest(url: Uri.parse('https://trofstack-production.up.railway.app/?fbclid=IwAR0YL3YYoNxnwjQdD6X8v_7c5FIOVZda2mmcuKgO_zkU1XoCN66xGOxvCEs')),
+          ),
+        ),
+        // Image.asset(AppImg.logo)
         // const MyFiles(),
         // const SizedBox(height: defaultPadding),
         // const RecentFiles(),
