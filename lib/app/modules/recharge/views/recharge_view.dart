@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_overlay_pro/loading_overlay_pro.dart';
 import 'package:qlphongtro/app/core/utils/font_utils.dart';
 import 'package:qlphongtro/app/modules/recharge/controllers/recharge_controller.dart';
@@ -12,6 +13,8 @@ class RechargeView extends GetView<RechargeController>{
 
   @override
   RechargeController controller = Get.put(RechargeController());
+
+  NumberFormat currencyFormat = NumberFormat('#,##0', 'vi_VN');
   @override
   Widget build(BuildContext context) {
 
@@ -99,7 +102,7 @@ class RechargeView extends GetView<RechargeController>{
                 children: [
                   Text("Số dư ví :", style: FontUtils.font14W500(),),
                   const SizedBox(width: 10,),
-                  Text("${controller.rechargeDto.bankAcount ?? 0.0}")
+                  Text("${currencyFormat.format(controller.rechargeDto.bankAcount ?? 0.0)} VND")
                 ],
               )
             ],

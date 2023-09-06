@@ -1,7 +1,7 @@
 class AppConst{
 
   static const String urlBase =
-      'https://phong-tro-fstack-logic-new-production.up.railway.app';
+      'https://trofstack-production.up.railway.app';
 
   static  String getUserRole = "/user-role/getUserRole";
   static  String updateUserBank(int id) => "/user-bank/update-bank-acount/$id";

@@ -24,6 +24,7 @@ dependencies:
   google_fonts: ^4.0.3
   flutter_svg: ^0.22.0
   fl_chart: ^0.61.0
+  quickalert: ^1.0.2
 
 
 

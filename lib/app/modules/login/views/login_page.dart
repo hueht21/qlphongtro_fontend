@@ -47,7 +47,10 @@ class LoginPage extends GetView<LoginController> {
       color: AppColors.darkLogin,
       child: SingleChildScrollView(
         child: Column(
-          children: [Image.asset(AppImg.logo), viewBuildInput(controller)],
+          children: [
+            Image.asset(AppImg.logo),
+            viewBuildInput(controller),
+          ],
         ).paddingOnly(top: Get.height * 0.15),
       ),
     );

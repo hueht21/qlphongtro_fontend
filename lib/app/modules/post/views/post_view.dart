@@ -18,7 +18,8 @@ class PostViewPage extends GetView<PostController>{
 
   PostWaitingController postWaitingController = Get.find();
 
-  PostModel post = Get.arguments;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,7 @@ class PostViewPage extends GetView<PostController>{
               color: AppColors.secondaryColor,
               borderRadius: BorderRadius.all(Radius.circular(AppDimens.sizeCircular)),
             ),
-            child: DetailPost(post,postWaitingController)
+            child: DetailPost(controller.post,postWaitingController)
           ).paddingOnly(top: 20,left: 15,right: 15),
         ),
       ),
